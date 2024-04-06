@@ -72,7 +72,7 @@ import {
 } from 'lexical';
 import {Dispatch, useCallback, useEffect, useState} from 'react';
 import * as React from 'react';
-// import {IS_APPLE} from 'shared/environment';
+import {IS_APPLE} from '../../shared/src/environment.ts';
 
 import useModal from '../../hooks/useModal.tsx';
 // import catTypingGif from '../../images/cat-typing.gif';
@@ -81,10 +81,10 @@ import DropDown, {DropDownItem} from '../../ui/DropDown.tsx';
 import DropdownColorPicker from '../../ui/DropdownColorPicker.tsx';
 import {getSelectedNode} from '../../utils/getSelectedNode.ts';
 import {sanitizeUrl} from '../../utils/url.ts';
-import {EmbedConfigs} from '../AutoEmbedPlugin/index.tsx';
+// import {EmbedConfigs} from '../AutoEmbedPlugin/index.tsx';
 import {INSERT_COLLAPSIBLE_COMMAND} from '../CollapsiblePlugin/index.ts';
-import {InsertEquationDialog} from '../EquationsPlugin/index.tsx';
-import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin/index.ts';
+// import {InsertEquationDialog} from '../EquationsPlugin/index.tsx';
+// import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin/index.ts';
 import {
   INSERT_IMAGE_COMMAND,
   InsertImageDialog,
@@ -92,8 +92,8 @@ import {
 } from '../ImagesPlugin/index.tsx';
 import {InsertInlineImageDialog} from '../InlineImagePlugin/index.tsx';
 import InsertLayoutDialog from '../LayoutPlugin/InsertLayoutDialog.tsx';
-import {INSERT_PAGE_BREAK} from '../PageBreakPlugin/index.tsx';
-import {InsertPollDialog} from '../PollPlugin/index.tsx';
+// import {INSERT_PAGE_BREAK} from '../PageBreakPlugin/index.tsx';
+// import {InsertPollDialog} from '../PollPlugin/index.tsx';
 import {InsertTableDialog} from '../TablePlugin.tsx';
 import FontSize from './fontSize.tsx';
 
@@ -517,7 +517,6 @@ export default function ToolbarPlugin({
 }: {
   setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
-  const IS_APPLE=false
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [blockType, setBlockType] =
@@ -1038,14 +1037,14 @@ export default function ToolbarPlugin({
               <i className="icon horizontal-rule" />
               <span className="text">Horizontal Rule</span>
             </DropDownItem>
-            <DropDownItem
+            {/* <DropDownItem
               onClick={() => {
                 activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
               }}
               className="item">
               <i className="icon page-break" />
               <span className="text">Page Break</span>
-            </DropDownItem>
+            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 showModal('Insert Image', (onClose) => (
@@ -1072,28 +1071,6 @@ export default function ToolbarPlugin({
               <i className="icon image" />
               <span className="text">Inline Image</span>
             </DropDownItem>
-            {/* <DropDownItem
-              onClick={() =>
-                insertGifOnClick({
-                  altText: 'Cat typing on a laptop',
-                  src: catTypingGif,
-                })
-              }
-              className="item">
-              <i className="icon gif" />
-              <span className="text">GIF</span>
-            </DropDownItem> */}
-            <DropDownItem
-              onClick={() => {
-                activeEditor.dispatchCommand(
-                  INSERT_EXCALIDRAW_COMMAND,
-                  undefined,
-                );
-              }}
-              className="item">
-              <i className="icon diagram-2" />
-              <span className="text">Excalidraw</span>
-            </DropDownItem>
             <DropDownItem
               onClick={() => {
                 showModal('Insert Table', (onClose) => (
@@ -1107,7 +1084,7 @@ export default function ToolbarPlugin({
               <i className="icon table" />
               <span className="text">Table</span>
             </DropDownItem>
-            <DropDownItem
+            {/* <DropDownItem
               onClick={() => {
                 showModal('Insert Poll', (onClose) => (
                   <InsertPollDialog
@@ -1119,7 +1096,7 @@ export default function ToolbarPlugin({
               className="item">
               <i className="icon poll" />
               <span className="text">Poll</span>
-            </DropDownItem>
+            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 showModal('Insert Columns Layout', (onClose) => (
@@ -1132,20 +1109,6 @@ export default function ToolbarPlugin({
               className="item">
               <i className="icon columns" />
               <span className="text">Columns Layout</span>
-            </DropDownItem>
-
-            <DropDownItem
-              onClick={() => {
-                showModal('Insert Equation', (onClose) => (
-                  <InsertEquationDialog
-                    activeEditor={activeEditor}
-                    onClose={onClose}
-                  />
-                ));
-              }}
-              className="item">
-              <i className="icon equation" />
-              <span className="text">Equation</span>
             </DropDownItem>
             <DropDownItem
               onClick={() => {
@@ -1167,7 +1130,7 @@ export default function ToolbarPlugin({
               <i className="icon caret-right" />
               <span className="text">Collapsible container</span>
             </DropDownItem>
-            {EmbedConfigs.map((embedConfig) => (
+            {/* {EmbedConfigs.map((embedConfig) => (
               <DropDownItem
                 key={embedConfig.type}
                 onClick={() => {
@@ -1180,7 +1143,7 @@ export default function ToolbarPlugin({
                 {embedConfig.icon}
                 <span className="text">{embedConfig.contentName}</span>
               </DropDownItem>
-            ))}
+            ))} */}
           </DropDown>
         </>
       )}

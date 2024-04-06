@@ -36,15 +36,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import useModal from '../../hooks/useModal.tsx';
-import catTypingGif from '../../images/cat-typing.gif';
-import {EmbedConfigs} from '../AutoEmbedPlugin/index.tsx';
+// import {EmbedConfigs} from '../AutoEmbedPlugin/index.tsx';
 import {INSERT_COLLAPSIBLE_COMMAND} from '../CollapsiblePlugin/index.ts';
-import {InsertEquationDialog} from '../EquationsPlugin/index.tsx';
-import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin/index.ts';
+// import {InsertEquationDialog} from '../EquationsPlugin/index.tsx';
+// import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin/index.ts';
 import {INSERT_IMAGE_COMMAND, InsertImageDialog} from '../ImagesPlugin/index.tsx';
 import InsertLayoutDialog from '../LayoutPlugin/InsertLayoutDialog.tsx';
-import {INSERT_PAGE_BREAK} from '../PageBreakPlugin/index.tsx';
-import {InsertPollDialog} from '../PollPlugin/index.tsx';
+// import {INSERT_PAGE_BREAK} from '../PageBreakPlugin/index.tsx';
+// import {InsertPollDialog} from '../PollPlugin/index.tsx';
 import {InsertTableDialog} from '../TablePlugin.tsx';
 
 class ComponentPickerOption extends MenuOption {
@@ -234,51 +233,51 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       onSelect: () =>
         editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined),
     }),
-    new ComponentPickerOption('Page Break', {
-      icon: <i className="icon page-break" />,
-      keywords: ['page break', 'divider'],
-      onSelect: () => editor.dispatchCommand(INSERT_PAGE_BREAK, undefined),
-    }),
-    new ComponentPickerOption('Excalidraw', {
-      icon: <i className="icon diagram-2" />,
-      keywords: ['excalidraw', 'diagram', 'drawing'],
-      onSelect: () =>
-        editor.dispatchCommand(INSERT_EXCALIDRAW_COMMAND, undefined),
-    }),
-    new ComponentPickerOption('Poll', {
-      icon: <i className="icon poll" />,
-      keywords: ['poll', 'vote'],
-      onSelect: () =>
-        showModal('Insert Poll', (onClose) => (
-          <InsertPollDialog activeEditor={editor} onClose={onClose} />
-        )),
-    }),
-    ...EmbedConfigs.map(
-      (embedConfig) =>
-        new ComponentPickerOption(`Embed ${embedConfig.contentName}`, {
-          icon: embedConfig.icon,
-          keywords: [...embedConfig.keywords, 'embed'],
-          onSelect: () =>
-            editor.dispatchCommand(INSERT_EMBED_COMMAND, embedConfig.type),
-        }),
-    ),
-    new ComponentPickerOption('Equation', {
-      icon: <i className="icon equation" />,
-      keywords: ['equation', 'latex', 'math'],
-      onSelect: () =>
-        showModal('Insert Equation', (onClose) => (
-          <InsertEquationDialog activeEditor={editor} onClose={onClose} />
-        )),
-    }),
-    new ComponentPickerOption('GIF', {
-      icon: <i className="icon gif" />,
-      keywords: ['gif', 'animate', 'image', 'file'],
-      onSelect: () =>
-        editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
-          altText: 'Cat typing on a laptop',
-          src: catTypingGif,
-        }),
-    }),
+    // new ComponentPickerOption('Page Break', {
+    //   icon: <i className="icon page-break" />,
+    //   keywords: ['page break', 'divider'],
+    //   onSelect: () => editor.dispatchCommand(INSERT_PAGE_BREAK, undefined),
+    // }),
+    // new ComponentPickerOption('Excalidraw', {
+    //   icon: <i className="icon diagram-2" />,
+    //   keywords: ['excalidraw', 'diagram', 'drawing'],
+    //   onSelect: () =>
+    //     editor.dispatchCommand(INSERT_EXCALIDRAW_COMMAND, undefined),
+    // }),
+    // new ComponentPickerOption('Poll', {
+    //   icon: <i className="icon poll" />,
+    //   keywords: ['poll', 'vote'],
+    //   onSelect: () =>
+    //     showModal('Insert Poll', (onClose) => (
+    //       <InsertPollDialog activeEditor={editor} onClose={onClose} />
+    //     )),
+    // }),
+    // ...EmbedConfigs.map(
+    //   (embedConfig) =>
+    //     new ComponentPickerOption(`Embed ${embedConfig.contentName}`, {
+    //       icon: embedConfig.icon,
+    //       keywords: [...embedConfig.keywords, 'embed'],
+    //       onSelect: () =>
+    //         editor.dispatchCommand(INSERT_EMBED_COMMAND, embedConfig.type),
+    //     }),
+    // ),
+    // new ComponentPickerOption('Equation', {
+    //   icon: <i className="icon equation" />,
+    //   keywords: ['equation', 'latex', 'math'],
+    //   onSelect: () =>
+    //     showModal('Insert Equation', (onClose) => (
+    //       <InsertEquationDialog activeEditor={editor} onClose={onClose} />
+    //     )),
+    // }),
+    // new ComponentPickerOption('GIF', {
+    //   icon: <i className="icon gif" />,
+    //   keywords: ['gif', 'animate', 'image', 'file'],
+    //   onSelect: () =>
+    //     editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+    //       altText: 'Cat typing on a laptop',
+    //       // src: catTypingGif,
+    //     }),
+    // }),
     new ComponentPickerOption('Image', {
       icon: <i className="icon image" />,
       keywords: ['image', 'photo', 'picture', 'file'],

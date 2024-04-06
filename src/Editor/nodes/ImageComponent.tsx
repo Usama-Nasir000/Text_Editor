@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type {
   BaseSelection,
   LexicalCommand,
@@ -48,11 +40,11 @@ import {Suspense, useCallback, useEffect, useRef, useState} from 'react';
 import {createWebsocketProvider} from '../collaboration.js';
 import {useSettings} from '../context/SettingsContext.tsx';
 import {useSharedHistoryContext} from '../context/SharedHistoryContext.tsx';
-import EmojisPlugin from '../plugins/EmojisPlugin/index.ts';
+// import EmojisPlugin from '../plugins/EmojisPlugin/index.ts';
 import KeywordsPlugin from '../plugins/KeywordsPlugin/index.ts';
 import LinkPlugin from '../plugins/LinkPlugin/index.tsx';
-import MentionsPlugin from '../plugins/MentionsPlugin/index.tsx';
-import TreeViewPlugin from '../plugins/TreeViewPlugin/index.tsx';
+// import MentionsPlugin from '../plugins/MentionsPlugin/index.tsx';
+// import TreeViewPlugin from '../plugins/TreeViewPlugin/index.tsx';
 import ContentEditable from '../ui/ContentEditable.tsx';
 import ImageResizer from '../ui/ImageResizer.tsx';
 import Placeholder from '../ui/Placeholder.tsx';
@@ -389,12 +381,12 @@ export default function ImageComponent({
           <div className="image-caption-container">
             <LexicalNestedComposer initialEditor={caption}>
               <AutoFocusPlugin />
-              <MentionsPlugin />
+              {/* <MentionsPlugin /> */}
               <LinkPlugin />
-              <EmojisPlugin />
+              {/* <EmojisPlugin /> */}
               <HashtagPlugin />
               <KeywordsPlugin />
-              {isCollabActive ? (
+              {/* {isCollabActive ? (
                 <CollaborationPlugin
                   id={caption.getKey()}
                   providerFactory={createWebsocketProvider}
@@ -402,7 +394,7 @@ export default function ImageComponent({
                 />
               ) : (
                 <HistoryPlugin externalHistoryState={historyState} />
-              )}
+              )} */}
               <RichTextPlugin
                 contentEditable={
                   <ContentEditable className="ImageNode__contentEditable" />
@@ -414,7 +406,7 @@ export default function ImageComponent({
                 }
                 ErrorBoundary={LexicalErrorBoundary}
               />
-              {showNestedEditorTreeView === true ? <TreeViewPlugin /> : null}
+              {/* {showNestedEditorTreeView === true ? <TreeViewPlugin /> : null} */}
             </LexicalNestedComposer>
           </div>
         )}

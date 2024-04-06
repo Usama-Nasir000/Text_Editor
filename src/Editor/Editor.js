@@ -21,9 +21,7 @@ import { CAN_USE_DOM } from './canUseDom';
 import { createWebsocketProvider } from './collaboration';
 import { useSettings } from './context/SettingsContext.tsx';
 import { useSharedHistoryContext } from './context/SharedHistoryContext.tsx';
-import ActionsPlugin from './plugins/ActionsPlugin/index.tsx';
 import AutocompletePlugin from './plugins/AutocompletePlugin/index.tsx';
-import AutoEmbedPlugin from './plugins/AutoEmbedPlugin/index.tsx';
 import AutoLinkPlugin from './plugins/AutoLinkPlugin/index.tsx';
 import CodeActionMenuPlugin from './plugins/CodeActionMenuPlugin/index.tsx';
 import CodeHighlightPlugin from './plugins/CodeHighlightPlugin/index.ts';
@@ -33,11 +31,6 @@ import ComponentPickerPlugin from './plugins/ComponentPickerPlugin/index.tsx';
 import ContextMenuPlugin from './plugins/ContextMenuPlugin/index.tsx';
 import DragDropPaste from './plugins/DragDropPastePlugin/index.ts';
 import DraggableBlockPlugin from './plugins/DraggableBlockPlugin/index.tsx';
-import EmojiPickerPlugin from './plugins/EmojiPickerPlugin/index.tsx';
-import EmojisPlugin from './plugins/EmojisPlugin/index.ts';
-import EquationsPlugin from './plugins/EquationsPlugin/index.tsx';
-import ExcalidrawPlugin from './plugins/ExcalidrawPlugin/index.ts';
-import FigmaPlugin from './plugins/FigmaPlugin/index.tsx';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin/index.tsx';
 import FloatingTextFormatToolbarPlugin from './plugins/FloatingTextFormatToolbarPlugin/index.tsx';
 import ImagesPlugin from './plugins/ImagesPlugin/index.tsx';
@@ -48,18 +41,11 @@ import LinkPlugin from './plugins/LinkPlugin/index.tsx';
 import ListMaxIndentLevelPlugin from './plugins/ListMaxIndentLevelPlugin/index.ts';
 import MarkdownShortcutPlugin from './plugins/MarkdownShortcutPlugin/index.tsx';
 import { MaxLengthPlugin } from './plugins/MaxLengthPlugin/index.tsx';
-import MentionsPlugin from './plugins/MentionsPlugin/index.tsx';
-import PageBreakPlugin from './plugins/PageBreakPlugin/index.tsx';
-import PollPlugin from './plugins/PollPlugin/index.tsx';
-import SpeechToTextPlugin from './plugins/SpeechToTextPlugin/index.ts';
 import TabFocusPlugin from './plugins/TabFocusPlugin/index.tsx';
 import TableCellActionMenuPlugin from './plugins/TableActionMenuPlugin/index.tsx';
 import TableCellResizer from './plugins/TableCellResizer/index.tsx';
 import TableOfContentsPlugin from './plugins/TableOfContentsPlugin/index.tsx';
 import ToolbarPlugin from './plugins/ToolbarPlugin/index.tsx';
-import TreeViewPlugin from './plugins/TreeViewPlugin/index.tsx';
-import TwitterPlugin from './plugins/TwitterPlugin/index.ts';
-import YouTubePlugin from './plugins/YouTubePlugin/index.ts';
 import ContentEditable from './ui/ContentEditable.tsx';
 import Placeholder from './ui/Placeholder.tsx';
 
@@ -67,7 +53,7 @@ const skipCollaborationInit =
   // @ts-expect-error
   window.parent != null && window.parent.frames.right === window;
 
-export default function Editor() {
+export default function Editor({isEditableEditor}) {
   const { historyState } = useSharedHistoryContext();
   const {
     settings: {
@@ -78,8 +64,6 @@ export default function Editor() {
       isCharLimitUtf8,
       isRichText,
       showTreeView,
-      showTableOfContents,
-      shouldUseLexicalContextMenu,
       tableCellMerge,
       tableCellBackgroundColor,
     },
@@ -120,7 +104,7 @@ export default function Editor() {
 
   return (
     <>
-      {isRichText && <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />}
+      {isRichText && isEditableEditor&&<ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />}
       <div
         className={`editor-container ${
           showTreeView ? 'tree-view' : ''
@@ -131,19 +115,11 @@ export default function Editor() {
         <AutoFocusPlugin />
         <ClearEditorPlugin />
         <ComponentPickerPlugin />
-        <EmojiPickerPlugin />
-        <AutoEmbedPlugin />
-
-        <MentionsPlugin />
-        <EmojisPlugin />
-        <HashtagPlugin />
-        <KeywordsPlugin />
-        <SpeechToTextPlugin />
         <AutoLinkPlugin />
-        <CommentPlugin
+        {/* <CommentPlugin
           providerFactory={isCollab ? createWebsocketProvider : undefined}
-        />
-        {isRichText ? (
+        /> */}
+        {/* {isRichText ? ( */}
           <>
             {isCollab ? (
               <CollaborationPlugin
@@ -156,7 +132,7 @@ export default function Editor() {
             )}
             <RichTextPlugin
               contentEditable={
-                <div className="editor-scroller">
+                <div className={`${isEditableEditor?"editor-scroller":"editor-scroller-non-editable"}`}>
                   <div className="editor" ref={onRef}>
                     <ContentEditable />
                   </div>
@@ -178,18 +154,11 @@ export default function Editor() {
             <ImagesPlugin />
             <InlineImagePlugin />
             <LinkPlugin />
-            <PollPlugin />
-            <TwitterPlugin />
-            <YouTubePlugin />
-            <FigmaPlugin />
             <LexicalClickableLinkPlugin disabled={isEditable} />
             <HorizontalRulePlugin />
-            <EquationsPlugin />
-            <ExcalidrawPlugin />
             <TabFocusPlugin />
             <TabIndentationPlugin />
             <CollapsiblePlugin />
-            <PageBreakPlugin />
             <LayoutPlugin />
             {floatingAnchorElem && !isSmallWidthViewport && (
               <>
@@ -211,28 +180,24 @@ export default function Editor() {
               </>
             )}
           </>
-        ) : (
-          <>
+        {/* ) : ( */}
+          {/* <>
             <PlainTextPlugin
               contentEditable={<ContentEditable />}
               placeholder={placeholder}
               ErrorBoundary={LexicalErrorBoundary}
             />
             <HistoryPlugin externalHistoryState={historyState} />
-          </>
-        )}
-        {(isCharLimit || isCharLimitUtf8) && (
+          </> */}
+        {/* )} */}
+        {/* {(isCharLimit || isCharLimitUtf8) && (
           <CharacterLimitPlugin
             charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
             maxLength={5}
           />
-        )}
+        )} */}
         {isAutocomplete && <AutocompletePlugin />}
-        <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
-        {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
-        <ActionsPlugin isRichText={isRichText} />
       </div>
-      {showTreeView && <TreeViewPlugin />}
     </>
   );
 }
