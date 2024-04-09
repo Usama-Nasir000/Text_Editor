@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import {
   $createCodeNode,
   $isCodeNode,
@@ -21,7 +13,6 @@ import {
   INSERT_UNORDERED_LIST_COMMAND,
   ListNode,
 } from '@lexical/list';
-import {INSERT_EMBED_COMMAND} from '@lexical/react/LexicalAutoEmbedPlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {$isDecoratorBlockNode} from '@lexical/react/LexicalDecoratorBlockNode';
 import {INSERT_HORIZONTAL_RULE_COMMAND} from '@lexical/react/LexicalHorizontalRuleNode';
@@ -75,16 +66,11 @@ import * as React from 'react';
 import {IS_APPLE} from '../../shared/src/environment.ts';
 
 import useModal from '../../hooks/useModal.tsx';
-// import catTypingGif from '../../images/cat-typing.gif';
-import {$createStickyNode} from '../../nodes/StickyNode.tsx';
 import DropDown, {DropDownItem} from '../../ui/DropDown.tsx';
 import DropdownColorPicker from '../../ui/DropdownColorPicker.tsx';
 import {getSelectedNode} from '../../utils/getSelectedNode.ts';
 import {sanitizeUrl} from '../../utils/url.ts';
-// import {EmbedConfigs} from '../AutoEmbedPlugin/index.tsx';
 import {INSERT_COLLAPSIBLE_COMMAND} from '../CollapsiblePlugin/index.ts';
-// import {InsertEquationDialog} from '../EquationsPlugin/index.tsx';
-// import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin/index.ts';
 import {
   INSERT_IMAGE_COMMAND,
   InsertImageDialog,
@@ -92,8 +78,6 @@ import {
 } from '../ImagesPlugin/index.tsx';
 import {InsertInlineImageDialog} from '../InlineImagePlugin/index.tsx';
 import InsertLayoutDialog from '../LayoutPlugin/InsertLayoutDialog.tsx';
-// import {INSERT_PAGE_BREAK} from '../PageBreakPlugin/index.tsx';
-// import {InsertPollDialog} from '../PollPlugin/index.tsx';
 import {InsertTableDialog} from '../TablePlugin.tsx';
 import FontSize from './fontSize.tsx';
 
@@ -1037,14 +1021,6 @@ export default function ToolbarPlugin({
               <i className="icon horizontal-rule" />
               <span className="text">Horizontal Rule</span>
             </DropDownItem>
-            {/* <DropDownItem
-              onClick={() => {
-                activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
-              }}
-              className="item">
-              <i className="icon page-break" />
-              <span className="text">Page Break</span>
-            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 showModal('Insert Image', (onClose) => (
@@ -1084,19 +1060,6 @@ export default function ToolbarPlugin({
               <i className="icon table" />
               <span className="text">Table</span>
             </DropDownItem>
-            {/* <DropDownItem
-              onClick={() => {
-                showModal('Insert Poll', (onClose) => (
-                  <InsertPollDialog
-                    activeEditor={activeEditor}
-                    onClose={onClose}
-                  />
-                ));
-              }}
-              className="item">
-              <i className="icon poll" />
-              <span className="text">Poll</span>
-            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 showModal('Insert Columns Layout', (onClose) => (
@@ -1112,38 +1075,12 @@ export default function ToolbarPlugin({
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                editor.update(() => {
-                  const root = $getRoot();
-                  const stickyNode = $createStickyNode(0, 0);
-                  root.append(stickyNode);
-                });
-              }}
-              className="item">
-              <i className="icon sticky" />
-              <span className="text">Sticky Note</span>
-            </DropDownItem>
-            <DropDownItem
-              onClick={() => {
                 editor.dispatchCommand(INSERT_COLLAPSIBLE_COMMAND, undefined);
               }}
               className="item">
               <i className="icon caret-right" />
               <span className="text">Collapsible container</span>
             </DropDownItem>
-            {/* {EmbedConfigs.map((embedConfig) => (
-              <DropDownItem
-                key={embedConfig.type}
-                onClick={() => {
-                  activeEditor.dispatchCommand(
-                    INSERT_EMBED_COMMAND,
-                    embedConfig.type,
-                  );
-                }}
-                className="item">
-                {embedConfig.icon}
-                <span className="text">{embedConfig.contentName}</span>
-              </DropDownItem>
-            ))} */}
           </DropDown>
         </>
       )}

@@ -44,8 +44,7 @@ import { MaxLengthPlugin } from './plugins/MaxLengthPlugin/index.tsx';
 import TabFocusPlugin from './plugins/TabFocusPlugin/index.tsx';
 import TableCellActionMenuPlugin from './plugins/TableActionMenuPlugin/index.tsx';
 import TableCellResizer from './plugins/TableCellResizer/index.tsx';
-import TableOfContentsPlugin from './plugins/TableOfContentsPlugin/index.tsx';
-import ToolbarPlugin from './plugins/ToolbarPlugin/index.tsx';
+import ListToolbarPlugin from './plugins/ToolbarPlugin/ListToolbarPlugin.tsx';
 import ContentEditable from './ui/ContentEditable.tsx';
 import Placeholder from './ui/Placeholder.tsx';
 import './index.css'
@@ -54,7 +53,7 @@ const skipCollaborationInit =
   // @ts-expect-error
   window.parent != null && window.parent.frames.right === window;
 
-export default function Editor({isEditableEditor}) {
+export default function ListEditor({isEditableEditor}) {
   const { historyState } = useSharedHistoryContext();
   const {
     settings: {
@@ -105,7 +104,7 @@ export default function Editor({isEditableEditor}) {
 
   return (
     <>
-      {isRichText && isEditableEditor&&<ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />}
+      {isRichText && isEditableEditor&&<ListToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />}
       <div
         className={`editor-container ${
           showTreeView ? 'tree-view' : ''
